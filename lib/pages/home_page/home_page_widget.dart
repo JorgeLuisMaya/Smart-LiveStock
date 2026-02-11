@@ -325,10 +325,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      context.pushNamed(HomePageWidget.routeName);
+                      context.pushNamed(FeedingWidget.routeName);
                     },
                     child: Material(
-                      color: Colors.transparent,
+                      color: const Color.fromRGBO(0, 0, 0, 0),
                       child: ListTile(
                         leading: Icon(
                           Icons.food_bank,

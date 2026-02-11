@@ -104,6 +104,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: CreateAccountPageWidget.routeName,
           path: CreateAccountPageWidget.routePath,
           builder: (context, params) => CreateAccountPageWidget(),
+        ),
+        FFRoute(
+          name: FeedingWidget.routeName,
+          path: FeedingWidget.routePath,
+          builder: (context, params) => FeedingWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
