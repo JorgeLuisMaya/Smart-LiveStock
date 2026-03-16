@@ -1,6 +1,4 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'feeding_page_widget.dart' show FeedingWidget;
 import 'package:flutter/material.dart';
 import 'dart:async';

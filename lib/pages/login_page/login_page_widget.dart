@@ -322,6 +322,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       0.0, 0.0, 0.0, 16.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      AppStateNotifier.instance.setGuestUser(false);
+
                                       GoRouter.of(context).prepareAuthEvent();
 
                                       final user =
@@ -365,6 +367,29 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                  ),
+                                ),
+
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 16.0),
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
+                                      AppStateNotifier.instance.setGuestUser(true);
+                                      context.goNamed(HomePageWidget.routeName);
+                                    },
+                                    text: 'Continue as Guest',
+                                    options: FFButtonOptions(
+                                      width: 370.0,
+                                      height: 44.0,
+                                      color: Colors.grey,
+                                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                            fontFamily: 'Plus Jakarta Sans',
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                          ),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      
                                     ),
                                   ),
                                 ),

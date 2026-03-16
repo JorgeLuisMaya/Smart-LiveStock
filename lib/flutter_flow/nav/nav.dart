@@ -35,10 +35,20 @@ class AppStateNotifier extends ChangeNotifier {
   /// Otherwise, this will trigger a refresh and interrupt the action(s).
   bool notifyOnAuthChange = true;
 
+  /// Determine if the user is a guest
+  bool isGuestUser = false;
+
+  // Add a helper to update guest state
+  void setGuestUser(bool guest) {
+    isGuestUser = guest;
+    notifyListeners();
+  }
+
+
   bool get loading => showSplashImage;
   bool get loggedIn => user?.loggedIn ?? false;
   bool get initiallyLoggedIn => initialUser?.loggedIn ?? false;
-  bool get shouldRedirect => loggedIn && _redirectLocation != null;
+  bool get shouldRedirect => loggedIn && _redirectLocation != null && !isGuestUser;
 
   String getRedirectLocation() => _redirectLocation!;
   bool hasRedirect() => _redirectLocation != null;
@@ -275,7 +285,7 @@ class FFRoute {
             return redirectLocation;
           }
 
-          if (requireAuth && !appStateNotifier.loggedIn) {
+          if (requireAuth && !appStateNotifier.loggedIn && !appStateNotifier.isGuestUser) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
             return '/loginPage';
           }

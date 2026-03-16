@@ -449,86 +449,170 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         ),
         appBar: AppBar(
           backgroundColor: Colors.white,
+          elevation: 0,
           iconTheme: IconThemeData(color: Colors.black),
-          automaticallyImplyLeading: false,
-          title: ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.asset(
-              'assets/images/Logo5.png',
-              width: 200.0,
-              height: 58.0,
-              fit: BoxFit.scaleDown,
+          title: Text(
+            "Smart LiveStock",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
           ),
+          centerTitle: false,
           actions: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-              child: FlutterFlowIconButton(
-                borderRadius: 30.0,
-                buttonSize: 60.0,
-                hoverColor: Color(0xCDECECEC),
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.black,
-                  size: 24.0,
-                ),
-                onPressed: () async {
-                  scaffoldKey.currentState!.openDrawer();
-                },
-              ),
+            IconButton(
+              icon: Icon(Icons.menu, color: Colors.black),
+              onPressed: () {
+                scaffoldKey.currentState!.openDrawer();
+              },
             ),
           ],
-          centerTitle: true,
-          elevation: 0.0,
         ),
         body: SafeArea(
-          top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(0.0),
-                  child: Image.network(
-                    'https://images.unsplash.com/photo-1517486795373-6b76787246bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyMXx8c2hlZXAlMjBmYXJtaW5nJTIwfGVufDB8fHx8MTczMzYyMTM3Nnww&ixlib=rb-4.0.3&q=80&w=1080',
-                    width: 200.0,
-                    height: 200.0,
-                    fit: BoxFit.cover,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+
+                /// Search Bar
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                  child: Text(
-                    FFLocalizations.of(context).getText(
-                      'woap3yh4' /* Smart Farming Starts Here */,
+                  child: TextField(
+                    controller: _model.searchController,
+                    focusNode: _model.searchFocusNode,
+                    decoration: InputDecoration(
+                      hintText: "Find animal by ID, RFID...",
+                      prefixIcon: Icon(Icons.search),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(vertical: 15),
                     ),
-                    textAlign: TextAlign.start,
-                    style: FlutterFlowTheme.of(context).displaySmall.override(
-                          fontFamily: 'Inter Tight',
-                          fontSize: 30.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    onSubmitted: (value) {
+                      // TODO: Implement search logic
+                      print("Searching for $value");
+                    },
                   ),
                 ),
-              ),
-              Container(
-                width: 100.0,
-                height: 100.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
+
+                SizedBox(height: 30),
+
+                /// Feature Grid
+                /// ///////////////////////////////////////
+                /// 
+                /// Squares for the features
+                /// 
+                /// ///////////////////////////////////////
+                Expanded(
+                  child: GridView(
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 160, // Controls width of each card
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 1, // Controls height ratio
+                    ),
+                    children: [
+
+                      _buildFeatureCard(
+                        title: "Water",
+                        icon: Icons.water_drop,
+                        color: Colors.blue,
+                        onTap: () {
+                          // context.pushNamed(WaterMonitorWidget.routeName);
+                        },
+                      ),
+
+                      _buildFeatureCard(
+                        title: "GPS",
+                        icon: Icons.location_on,
+                        color: Colors.green,
+                        onTap: () {
+                          // context.pushNamed(GPSWidget.routeName);
+                        },
+                      ),
+
+                      _buildFeatureCard(
+                        title: "Weight",
+                        icon: Icons.monitor_weight,
+                        color: Colors.orange,
+                        onTap: () {
+                          // context.pushNamed(WeightWidget.routeName);
+                        },
+                      ),
+
+                      _buildFeatureCard(
+                        title: "Age",
+                        icon: Icons.cake,
+                        color: Colors.purple,
+                        onTap: () {
+                          // context.pushNamed(AgeWidget.routeName);
+                        },
+                      ),
+
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+
+  Widget _buildFeatureCard({
+  required String title,
+  required IconData icon,
+  required Color color,
+  required VoidCallback onTap,
+}) {
+  return InkWell(
+    onTap: onTap,
+    borderRadius: BorderRadius.circular(20),
+    child: Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 45,
+            color: color,
+          ),
+          SizedBox(height: 12),
+
+          // Title
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
+          ),
+
+          SizedBox(height: 6),
+
+          // Subtitle
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey[700],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+  }
 }
+
