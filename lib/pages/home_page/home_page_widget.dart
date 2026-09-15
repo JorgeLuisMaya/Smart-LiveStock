@@ -237,88 +237,88 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                     ),
                   ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed(HomePageWidget.routeName);
-                    },
-                    child: Material(
-                      color: Colors.transparent,
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.calculate_outlined,
-                          color: Colors.white,
-                        ),
-                        title: Text(
-                          FFLocalizations.of(context).getText(
-                            'h1bpfrzg' /* Weight */,
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
-                                    fontFamily: 'Inter Tight',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: Colors.white,
-                          size: 24.0,
-                        ),
-                        tileColor: Color(0xFF181818),
-                        dense: false,
-                        contentPadding: EdgeInsetsDirectional.fromSTEB(
-                            12.0, 0.0, 12.0, 0.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed(HomePageWidget.routeName);
-                    },
-                    child: Material(
-                      color: Colors.transparent,
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.cake,
-                          color: Colors.white,
-                        ),
-                        title: Text(
-                          FFLocalizations.of(context).getText(
-                            '6gfhuqav' /* Age */,
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
-                                    fontFamily: 'Inter Tight',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: Colors.white,
-                          size: 24.0,
-                        ),
-                        tileColor: Color(0xFF181818),
-                        dense: false,
-                        contentPadding: EdgeInsetsDirectional.fromSTEB(
-                            12.0, 0.0, 12.0, 0.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0.0),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // InkWell(
+                  //   splashColor: Colors.transparent,
+                  //   focusColor: Colors.transparent,
+                  //   hoverColor: Colors.transparent,
+                  //   highlightColor: Colors.transparent,
+                  //   onTap: () async {
+                  //     context.pushNamed(HomePageWidget.routeName);
+                  //   },
+                  //   child: Material(
+                  //     color: Colors.transparent,
+                  //     child: ListTile(
+                  //       leading: Icon(
+                  //         Icons.calculate_outlined,
+                  //         color: Colors.white,
+                  //       ),
+                  //       title: Text(
+                  //         FFLocalizations.of(context).getText(
+                  //           'h1bpfrzg' /* Weight */,
+                  //         ),
+                  //         style:
+                  //             FlutterFlowTheme.of(context).titleLarge.override(
+                  //                   fontFamily: 'Inter Tight',
+                  //                   color: Colors.white,
+                  //                   letterSpacing: 0.0,
+                  //                 ),
+                  //       ),
+                  //       trailing: Icon(
+                  //         Icons.arrow_forward_ios_rounded,
+                  //         color: Colors.white,
+                  //         size: 24.0,
+                  //       ),
+                  //       tileColor: Color(0xFF181818),
+                  //       dense: false,
+                  //       contentPadding: EdgeInsetsDirectional.fromSTEB(
+                  //           12.0, 0.0, 12.0, 0.0),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(0.0),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // InkWell(
+                  //   splashColor: Colors.transparent,
+                  //   focusColor: Colors.transparent,
+                  //   hoverColor: Colors.transparent,
+                  //   highlightColor: Colors.transparent,
+                  //   onTap: () async {
+                  //     context.pushNamed(HomePageWidget.routeName);
+                  //   },
+                  //   child: Material(
+                  //     color: Colors.transparent,
+                  //     child: ListTile(
+                  //       leading: Icon(
+                  //         Icons.cake,
+                  //         color: Colors.white,
+                  //       ),
+                  //       title: Text(
+                  //         FFLocalizations.of(context).getText(
+                  //           '6gfhuqav' /* Age */,
+                  //         ),
+                  //         style:
+                  //             FlutterFlowTheme.of(context).titleLarge.override(
+                  //                   fontFamily: 'Inter Tight',
+                  //                   color: Colors.white,
+                  //                   letterSpacing: 0.0,
+                  //                 ),
+                  //       ),
+                  //       trailing: Icon(
+                  //         Icons.arrow_forward_ios_rounded,
+                  //         color: Colors.white,
+                  //         size: 24.0,
+                  //       ),
+                  //       tileColor: Color(0xFF181818),
+                  //       dense: false,
+                  //       contentPadding: EdgeInsetsDirectional.fromSTEB(
+                  //           12.0, 0.0, 12.0, 0.0),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(0.0),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -451,22 +451,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           backgroundColor: Colors.white,
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.black),
-          title: Text(
-            "Smart LiveStock",
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
+          title: Image.asset(
+            'assets/images/Logo5.png',
+            width: 200.0,
+            height: 200.0,
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.center,
+            // alignment: Alignment(0.0, 1.0),
           ),
-          centerTitle: false,
-          actions: [
-            IconButton(
-              icon: Icon(Icons.menu, color: Colors.black),
-              onPressed: () {
-                scaffoldKey.currentState!.openDrawer();
-              },
-            ),
-          ],
+          centerTitle: true,
+          // actions: [
+          //   IconButton(
+          //     icon: Icon(Icons.menu, color: Colors.black),
+          //     onPressed: () {
+          //       scaffoldKey.currentState!.openDrawer();
+          //     },
+          //   ),
+          // ],
         ),
         body: SafeArea(
           child: Padding(
@@ -516,38 +517,38 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     children: [
 
                       _buildFeatureCard(
-                        title: "Water",
-                        icon: Icons.water_drop,
+                        title: "Sheep #1",
+                        icon: Icons.pets,
                         color: Colors.blue,
                         onTap: () {
-                          // context.pushNamed(WaterMonitorWidget.routeName);
+                          context.pushNamed(AnimalPageWidget.routeName);
                         },
                       ),
 
                       _buildFeatureCard(
-                        title: "GPS",
-                        icon: Icons.location_on,
-                        color: Colors.green,
+                        title: "Sheep #2",
+                        icon: Icons.pets,
+                        color: Colors.blue,
                         onTap: () {
-                          // context.pushNamed(GPSWidget.routeName);
+                          context.pushNamed(AnimalPageWidget.routeName);
                         },
                       ),
 
                       _buildFeatureCard(
-                        title: "Weight",
-                        icon: Icons.monitor_weight,
-                        color: Colors.orange,
+                        title: "Sheep #3",
+                        icon: Icons.pets,
+                        color: Colors.blue,
                         onTap: () {
-                          // context.pushNamed(WeightWidget.routeName);
+                          context.pushNamed(AnimalPageWidget.routeName);
                         },
                       ),
 
                       _buildFeatureCard(
-                        title: "Age",
-                        icon: Icons.cake,
-                        color: Colors.purple,
+                        title: "Sheep #4",
+                        icon: Icons.pets,
+                        color: Colors.blue,
                         onTap: () {
-                          // context.pushNamed(AgeWidget.routeName);
+                          context.pushNamed(AnimalPageWidget.routeName);
                         },
                       ),
 

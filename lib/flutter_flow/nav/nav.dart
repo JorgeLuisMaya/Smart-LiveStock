@@ -119,6 +119,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: FeedingWidget.routeName,
           path: FeedingWidget.routePath,
           builder: (context, params) => FeedingWidget(),
+        ),
+        FFRoute(
+          name: AnimalPageWidget.routeName,
+          path: AnimalPageWidget.routePath,
+          builder: (context, params) => AnimalPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
