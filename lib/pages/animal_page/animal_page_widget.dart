@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'animal_page_model.dart';
 export 'animal_page_model.dart';
 
@@ -15,13 +16,6 @@ class AnimalPageWidget extends StatefulWidget {
   @override
   State<AnimalPageWidget> createState() => _AnimalPageWidgetState();
 }
-
-// class _AnimalPageWidgetState extends State<AnimalPageWidget> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
 
 class _AnimalPageWidgetState extends State<AnimalPageWidget> {
   late AnimalPageModel _model;
@@ -125,6 +119,8 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        Navigator.pop(context);
+
                         context.pushNamed(HomePageWidget.routeName);
                       },
                       child: Material(
@@ -168,6 +164,8 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      Navigator.pop(context);
+                      
                       context.pushNamed(WormTestWidget.routeName);
                     },
                     child: Material(
@@ -209,6 +207,8 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      Navigator.pop(context);
+                      
                       context.pushNamed(HomePageWidget.routeName);
                     },
                     child: Material(
@@ -244,94 +244,14 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                       ),
                     ),
                   ),
-                  // InkWell(
-                  //   splashColor: Colors.transparent,
-                  //   focusColor: Colors.transparent,
-                  //   hoverColor: Colors.transparent,
-                  //   highlightColor: Colors.transparent,
-                  //   onTap: () async {
-                  //     context.pushNamed(HomePageWidget.routeName);
-                  //   },
-                  //   child: Material(
-                  //     color: Colors.transparent,
-                  //     child: ListTile(
-                  //       leading: Icon(
-                  //         Icons.calculate_outlined,
-                  //         color: Colors.white,
-                  //       ),
-                  //       title: Text(
-                  //         FFLocalizations.of(context).getText(
-                  //           'h1bpfrzg' /* Weight */,
-                  //         ),
-                  //         style:
-                  //             FlutterFlowTheme.of(context).titleLarge.override(
-                  //                   fontFamily: 'Inter Tight',
-                  //                   color: Colors.white,
-                  //                   letterSpacing: 0.0,
-                  //                 ),
-                  //       ),
-                  //       trailing: Icon(
-                  //         Icons.arrow_forward_ios_rounded,
-                  //         color: Colors.white,
-                  //         size: 24.0,
-                  //       ),
-                  //       tileColor: Color(0xFF181818),
-                  //       dense: false,
-                  //       contentPadding: EdgeInsetsDirectional.fromSTEB(
-                  //           12.0, 0.0, 12.0, 0.0),
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(0.0),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  // InkWell(
-                  //   splashColor: Colors.transparent,
-                  //   focusColor: Colors.transparent,
-                  //   hoverColor: Colors.transparent,
-                  //   highlightColor: Colors.transparent,
-                  //   onTap: () async {
-                  //     context.pushNamed(HomePageWidget.routeName);
-                  //   },
-                  //   child: Material(
-                  //     color: Colors.transparent,
-                  //     child: ListTile(
-                  //       leading: Icon(
-                  //         Icons.cake,
-                  //         color: Colors.white,
-                  //       ),
-                  //       title: Text(
-                  //         FFLocalizations.of(context).getText(
-                  //           '6gfhuqav' /* Age */,
-                  //         ),
-                  //         style:
-                  //             FlutterFlowTheme.of(context).titleLarge.override(
-                  //                   fontFamily: 'Inter Tight',
-                  //                   color: Colors.white,
-                  //                   letterSpacing: 0.0,
-                  //                 ),
-                  //       ),
-                  //       trailing: Icon(
-                  //         Icons.arrow_forward_ios_rounded,
-                  //         color: Colors.white,
-                  //         size: 24.0,
-                  //       ),
-                  //       tileColor: Color(0xFF181818),
-                  //       dense: false,
-                  //       contentPadding: EdgeInsetsDirectional.fromSTEB(
-                  //           12.0, 0.0, 12.0, 0.0),
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(0.0),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      Navigator.pop(context);
+                      
                       context.pushNamed(FeedingWidget.routeName);
                     },
                     child: Material(
@@ -373,6 +293,8 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      Navigator.pop(context);
+                      
                       context.pushNamed(HomePageWidget.routeName);
                     },
                     child: Material(
@@ -414,6 +336,51 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      Navigator.pop(context);
+
+                      context.pushNamed(LoginPageWidget.routeName);
+                    },
+                    child: Material(
+                      color: const Color.fromRGBO(0, 0, 0, 0),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.login,
+                          color: Colors.white,
+                        ),
+                        title: Text(
+                          FFLocalizations.of(context).getText(
+                            'n2slwazh' /* Sign In */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    fontFamily: 'Inter Tight',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: Colors.white,
+                          size: 24.0,
+                        ),
+                        tileColor: Color(0xFF181818),
+                        dense: false,
+                        contentPadding: EdgeInsetsDirectional.fromSTEB(
+                            12.0, 0.0, 12.0, 0.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      Navigator.pop(context);
+                      
                       context.pushNamed(HomePageWidget.routeName);
                     },
                     child: Material(

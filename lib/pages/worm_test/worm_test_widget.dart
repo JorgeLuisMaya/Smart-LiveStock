@@ -126,6 +126,8 @@ class _WormTestWidgetState extends State<WormTestWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        Navigator.pop(context);
+                        
                         context.pushNamed(HomePageWidget.routeName);
                       },
                       child: Material(
@@ -169,6 +171,8 @@ class _WormTestWidgetState extends State<WormTestWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      Navigator.pop(context);
+                      
                       context.pushNamed(WormTestWidget.routeName);
                     },
                     child: Material(
@@ -210,6 +214,8 @@ class _WormTestWidgetState extends State<WormTestWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      Navigator.pop(context);
+                      
                       context.pushNamed(HomePageWidget.routeName);
                     },
                     child: Material(
@@ -251,88 +257,8 @@ class _WormTestWidgetState extends State<WormTestWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      context.pushNamed(HomePageWidget.routeName);
-                    },
-                    child: Material(
-                      color: Colors.transparent,
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.calculate_outlined,
-                          color: Colors.white,
-                        ),
-                        title: Text(
-                          FFLocalizations.of(context).getText(
-                            '7ci96bu1' /* Weight */,
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
-                                    fontFamily: 'Inter Tight',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: Colors.white,
-                          size: 24.0,
-                        ),
-                        tileColor: Color(0xFF181818),
-                        dense: false,
-                        contentPadding: EdgeInsetsDirectional.fromSTEB(
-                            12.0, 0.0, 12.0, 0.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed(HomePageWidget.routeName);
-                    },
-                    child: Material(
-                      color: Colors.transparent,
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.cake,
-                          color: Colors.white,
-                        ),
-                        title: Text(
-                          FFLocalizations.of(context).getText(
-                            'ix7dm5gv' /* Age */,
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
-                                    fontFamily: 'Inter Tight',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: Colors.white,
-                          size: 24.0,
-                        ),
-                        tileColor: Color(0xFF181818),
-                        dense: false,
-                        contentPadding: EdgeInsetsDirectional.fromSTEB(
-                            12.0, 0.0, 12.0, 0.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
+                      Navigator.pop(context);
+                      
                       context.pushNamed(HomePageWidget.routeName);
                     },
                     child: Material(
@@ -374,6 +300,8 @@ class _WormTestWidgetState extends State<WormTestWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      Navigator.pop(context);
+                      
                       context.pushNamed(HomePageWidget.routeName);
                     },
                     child: Material(
@@ -415,6 +343,51 @@ class _WormTestWidgetState extends State<WormTestWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      Navigator.pop(context);
+
+                      context.pushNamed(LoginPageWidget.routeName);
+                    },
+                    child: Material(
+                      color: const Color.fromRGBO(0, 0, 0, 0),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.login,
+                          color: Colors.white,
+                        ),
+                        title: Text(
+                          FFLocalizations.of(context).getText(
+                            'n2slwazh' /* Sign In */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    fontFamily: 'Inter Tight',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: Colors.white,
+                          size: 24.0,
+                        ),
+                        tileColor: Color(0xFF181818),
+                        dense: false,
+                        contentPadding: EdgeInsetsDirectional.fromSTEB(
+                            12.0, 0.0, 12.0, 0.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      Navigator.pop(context);
+                      
                       context.pushNamed(HomePageWidget.routeName);
                     },
                     child: Material(
@@ -468,7 +441,7 @@ class _WormTestWidgetState extends State<WormTestWidget> {
               fit: BoxFit.scaleDown,
             ),
           ),
-          actions: [
+          leading: 
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
               child: FlutterFlowIconButton(
@@ -486,7 +459,6 @@ class _WormTestWidgetState extends State<WormTestWidget> {
                 },
               ),
             ),
-          ],
           centerTitle: true,
           elevation: 0.0,
         ),

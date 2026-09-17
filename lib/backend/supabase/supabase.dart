@@ -16,7 +16,7 @@ class SupaFlow {
 
   static Future initialize() => Supabase.initialize(
         url: _kSupabaseUrl,
-        anonKey: _kSupabaseAnonKey,
+        publishableKey: _kSupabaseAnonKey,
         debug: false,
         authOptions:
             FlutterAuthClientOptions(authFlowType: AuthFlowType.implicit),
