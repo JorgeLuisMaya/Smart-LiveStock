@@ -1,9 +1,11 @@
+import 'package:flutter/rendering.dart';
+import 'package:smart_livestock/backend/supabase/database/database.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+// import 'package:supabase_flutter/supabase_flutter.dart';
 import 'animal_page_model.dart';
 export 'animal_page_model.dart';
 
@@ -21,6 +23,10 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
   late AnimalPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final _future = SupaFlow.client
+      .from('animals')
+      .select('*, stations(*)');
 
   @override
   void initState() {
@@ -473,20 +479,124 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
 
                 SizedBox(height: 30),
 
-                /// Feature Grid
                 /// ///////////////////////////////////////
                 ///
-                /// Squares for the features
+                /// Table for the stations
                 ///
                 /// ///////////////////////////////////////
                 Expanded(
-                  child: GridView(
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 160, // Controls width of each card
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 1, // Controls height ratio
-                    ),
+                  child: FutureBuilder(
+                    future: _future,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Center(child: Text('Error loading animals: ${snapshot.error}'));
+                      }
+                      if (!snapshot.hasData) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      final animals = snapshot.data!;
+                      return Center (
+                        child: SingleChildScrollView(
+                          child: Padding (
+                            padding: const EdgeInsets.all(15),
+                            child: Table (
+                              border: TableBorder.all(color: Colors.black),
+                              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                              children: [
+                                const TableRow(
+                                  decoration: BoxDecoration(
+                                    color: Colors.blueAccent,
+                                  ),
+                                  children: [
+                                    TableCell (
+                                      verticalAlignment: TableCellVerticalAlignment.middle,
+                                      child: Padding (
+                                        padding: EdgeInsets.all(8),
+                                        child: Text('Animal ID'),
+                                      )
+                                    ),
+                                    TableCell (
+                                      verticalAlignment: TableCellVerticalAlignment.middle,
+                                      child: Padding (
+                                        padding: EdgeInsets.all(8),
+                                        child: Text('Station ID'),
+                                      )
+                                    ),
+                                    TableCell (
+                                      verticalAlignment: TableCellVerticalAlignment.middle,
+                                      child: Padding (
+                                        padding: EdgeInsets.all(8),
+                                        child: Text('Weight'),
+                                      )
+                                    ),
+                                    TableCell (
+                                      verticalAlignment: TableCellVerticalAlignment.middle,
+                                      child: Padding (
+                                        padding: EdgeInsets.all(8),
+                                        child: Text('Height'),
+                                      )
+                                    ),
+                                    TableCell (
+                                      verticalAlignment: TableCellVerticalAlignment.middle,
+                                      child: Padding (
+                                        padding: EdgeInsets.all(8),
+                                        child: Text('Age'),
+                                      )
+                                    ),
+                                  ]
+                                ),
+                                ...List.generate(
+                                  animals.length, 
+                                  (index) {
+                                    final animal = animals[index];
+
+                                    return TableRow (
+                                      children: [
+                                        TableCell (
+                                          verticalAlignment: TableCellVerticalAlignment.middle,
+                                          child: Padding (
+                                            padding: EdgeInsets.all(8),
+                                            child: Text(animal['animal_id'].toString())
+                                          )
+                                        ),
+                                        TableCell (
+                                          verticalAlignment: TableCellVerticalAlignment.middle,
+                                          child: Padding (
+                                            padding: EdgeInsets.all(8),
+                                            child: Text(animal['station_id'].toString())
+                                          )
+                                        ),
+                                        TableCell (
+                                          verticalAlignment: TableCellVerticalAlignment.middle,
+                                          child: Padding (
+                                            padding: EdgeInsets.all(8),
+                                            child: Text(animal['weight'].toString())
+                                          )
+                                        ),
+                                        TableCell (
+                                          verticalAlignment: TableCellVerticalAlignment.middle,
+                                          child: Padding (
+                                            padding: EdgeInsets.all(8),
+                                            child: Text(animal['height'].toString())
+                                          )
+                                        ),
+                                        TableCell (
+                                          verticalAlignment: TableCellVerticalAlignment.middle,
+                                          child: Padding (
+                                            padding: EdgeInsets.all(8),
+                                            child: Text(animal['age'].toString())
+                                          )
+                                        ),
+                                      ]
+                                    );
+                                  }
+                                )
+                              ]
+                            )
+                          ),
+                        )
+                      );
+                    },
                   ),
                 ),
               ],
