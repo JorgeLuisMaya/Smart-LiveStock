@@ -1,5 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:smart_livestock/backend/supabase/database/database.dart';
+import 'package:smart_livestock/pages/home_page/home_page_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 // import 'package:supabase_flutter/supabase_flutter.dart';
 import 'animal_page_model.dart';
 export 'animal_page_model.dart';
+import 'package:to_csv/to_csv.dart' as exportCSV;
 
 class AnimalPageWidget extends StatefulWidget {
   const AnimalPageWidget({super.key});
@@ -25,8 +27,11 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final _future = SupaFlow.client
-      .from('animals')
-      .select('*, stations(*)');
+      .from('measurement_history')
+      .select('*, stations(*)')
+      .eq('station_id', station_num);
+
+  List<List<String>> listOfLists = [];
 
   @override
   void initState() {
@@ -51,7 +56,7 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
-        drawer: Container(
+        drawer: Container(      // Drawer that holds buttons that lead to other pages
           width: MediaQuery.sizeOf(context).width * 1.0,
           child: Drawer(
             elevation: 16.0,
@@ -116,7 +121,7 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                       ],
                     ),
                   ),
-                  Padding(
+                  Padding(      // Buttons inside drawer that go to a different page
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                     child: InkWell(
@@ -440,14 +445,37 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
             // alignment: Alignment(0.0, 1.0),
           ),
           centerTitle: true,
-          // actions: [
-          // IconButton(
-          //   icon: Icon(Icons.menu, color: Colors.black),
-          //   onPressed: () {
-          //     scaffoldKey.currentState!.openDrawer();
-          //   },
-          // ),
-          // ],
+          actions: [
+            IconButton(     // Download CSV button
+              icon: Image.asset(
+                'assets/images/downloadCsv.png',
+                width: 200.0,
+                height: 200.0,
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.center,
+              ),
+              onPressed: () {
+                List<String> header = [];
+                header.add('Measurement ID');
+                header.add('Station ID');
+                header.add('Measurement');
+                header.add('Battery Life');
+                header.add('Trough Empty Weight');
+                header.add('Trough Max Capacity');
+                header.add('Time');
+
+                exportCSV.myCSV(
+                  header, 
+                  listOfLists,
+                  setHeadersInFirstRow:true,
+                  includeNoRow: true, 
+                  sharing: false,
+                  fileName: "measurementsCSV",
+                );
+              },
+              iconSize: 45,
+            ),
+          ],
         ),
         body: SafeArea(
           child: Padding(
@@ -489,14 +517,29 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                     future: _future,
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return Center(child: Text('Error loading animals: ${snapshot.error}'));
+                        return Center(child: Text('Error loading station: ${snapshot.error}'));
                       }
                       if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
                       }
-                      final animals = snapshot.data!;
+                      final measurements = snapshot.data!;
+
+                      listOfLists = [];     // data that will be saved in the csv
+                      for (final measurement_i in measurements) {
+                        List<String> data = [
+                          measurement_i['measurement_id'].toString(),
+                          measurement_i['station_id'].toString(),
+                          measurement_i['measurement'].toString(),
+                          measurement_i['battery'].toString(),
+                          measurement_i['stations']['trough_empty_weight'].toString(),
+                          measurement_i['stations']['trough_max_capacity'].toString(),
+                          measurement_i['time'].toString()
+                        ];
+                        listOfLists.add(data);
+                      }
+
                       return Center (
-                        child: SingleChildScrollView(
+                        child: SingleChildScrollView(     // The full table
                           child: Padding (
                             padding: const EdgeInsets.all(15),
                             child: Table (
@@ -507,12 +550,12 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                                   decoration: BoxDecoration(
                                     color: Colors.blueAccent,
                                   ),
-                                  children: [
+                                  children: [     // The header for each column in the table
                                     TableCell (
                                       verticalAlignment: TableCellVerticalAlignment.middle,
                                       child: Padding (
                                         padding: EdgeInsets.all(8),
-                                        child: Text('Animal ID'),
+                                        child: Text('Measurement ID'),
                                       )
                                     ),
                                     TableCell (
@@ -526,65 +569,92 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                                       verticalAlignment: TableCellVerticalAlignment.middle,
                                       child: Padding (
                                         padding: EdgeInsets.all(8),
-                                        child: Text('Weight'),
+                                        child: Text('Measurement'),
                                       )
                                     ),
                                     TableCell (
                                       verticalAlignment: TableCellVerticalAlignment.middle,
                                       child: Padding (
                                         padding: EdgeInsets.all(8),
-                                        child: Text('Height'),
+                                        child: Text('Battery Life'),
                                       )
                                     ),
                                     TableCell (
                                       verticalAlignment: TableCellVerticalAlignment.middle,
                                       child: Padding (
                                         padding: EdgeInsets.all(8),
-                                        child: Text('Age'),
+                                        child: Text('Trough Empty Weight'),
+                                      )
+                                    ),
+                                    TableCell (
+                                      verticalAlignment: TableCellVerticalAlignment.middle,
+                                      child: Padding (
+                                        padding: EdgeInsets.all(8),
+                                        child: Text('Trough Max Capacity'),
+                                      )
+                                    ),
+                                    TableCell (
+                                      verticalAlignment: TableCellVerticalAlignment.middle,
+                                      child: Padding (
+                                        padding: EdgeInsets.all(8),
+                                        child: Text('Time'),
                                       )
                                     ),
                                   ]
                                 ),
-                                ...List.generate(
-                                  animals.length, 
+                                ...List.generate(     // The data for the tables
+                                  measurements.length, 
                                   (index) {
-                                    final animal = animals[index];
-
+                                    final measurement = measurements[index];
                                     return TableRow (
                                       children: [
                                         TableCell (
                                           verticalAlignment: TableCellVerticalAlignment.middle,
                                           child: Padding (
                                             padding: EdgeInsets.all(8),
-                                            child: Text(animal['animal_id'].toString())
+                                            child: Text(measurement['measurement_id'].toString())
                                           )
                                         ),
                                         TableCell (
                                           verticalAlignment: TableCellVerticalAlignment.middle,
                                           child: Padding (
                                             padding: EdgeInsets.all(8),
-                                            child: Text(animal['station_id'].toString())
+                                            child: Text(measurement['station_id'].toString())
                                           )
                                         ),
                                         TableCell (
                                           verticalAlignment: TableCellVerticalAlignment.middle,
                                           child: Padding (
                                             padding: EdgeInsets.all(8),
-                                            child: Text(animal['weight'].toString())
+                                            child: Text(measurement['measurement'].toString())
                                           )
                                         ),
                                         TableCell (
                                           verticalAlignment: TableCellVerticalAlignment.middle,
                                           child: Padding (
                                             padding: EdgeInsets.all(8),
-                                            child: Text(animal['height'].toString())
+                                            child: Text(measurement['battery'].toString())
                                           )
                                         ),
                                         TableCell (
                                           verticalAlignment: TableCellVerticalAlignment.middle,
                                           child: Padding (
                                             padding: EdgeInsets.all(8),
-                                            child: Text(animal['age'].toString())
+                                            child: Text(measurement['stations']['trough_empty_weight'].toString())
+                                          )
+                                        ),
+                                        TableCell (
+                                          verticalAlignment: TableCellVerticalAlignment.middle,
+                                          child: Padding (
+                                            padding: EdgeInsets.all(8),
+                                            child: Text(measurement['stations']['trough_max_capacity'].toString())
+                                          )
+                                        ),
+                                        TableCell (
+                                          verticalAlignment: TableCellVerticalAlignment.middle,
+                                          child: Padding (
+                                            padding: EdgeInsets.all(8),
+                                            child: Text(measurement['time'].toString())
                                           )
                                         ),
                                       ]

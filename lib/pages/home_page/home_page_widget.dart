@@ -1,3 +1,4 @@
+import 'package:smart_livestock/backend/supabase/database/database.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -5,6 +6,8 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
+
+String station_num = '0';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({super.key});
@@ -20,6 +23,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   late HomePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final _future = SupaFlow.client
+      .from('stations')
+      .select('*')
+      .order('station_id', ascending: true);
 
   @override
   void initState() {
@@ -459,7 +467,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     controller: _model.searchController,
                     focusNode: _model.searchFocusNode,
                     decoration: InputDecoration(
-                      hintText: "Find animal by ID, RFID...",
+                      hintText: "Find station by ID",
                       prefixIcon: Icon(Icons.search),
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(vertical: 15),
@@ -480,53 +488,38 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 /// 
                 /// ///////////////////////////////////////
                 Expanded(
-                  child: GridView(
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 160, // Controls width of each card
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 1, // Controls height ratio
-                    ),
-                    children: [
-
-                      _buildFeatureCard(
-                        title: "Sheep #1",
-                        icon: Icons.pets,
-                        color: Colors.blue,
-                        onTap: () {
-                          context.pushNamed(AnimalPageWidget.routeName);
-                        },
-                      ),
-
-                      _buildFeatureCard(
-                        title: "Sheep #2",
-                        icon: Icons.pets,
-                        color: Colors.blue,
-                        onTap: () {
-                          context.pushNamed(AnimalPageWidget.routeName);
-                        },
-                      ),
-
-                      _buildFeatureCard(
-                        title: "Sheep #3",
-                        icon: Icons.pets,
-                        color: Colors.blue,
-                        onTap: () {
-                          context.pushNamed(AnimalPageWidget.routeName);
-                        },
-                      ),
-
-                      _buildFeatureCard(
-                        title: "Sheep #4",
-                        icon: Icons.pets,
-                        color: Colors.blue,
-                        onTap: () {
-                          context.pushNamed(AnimalPageWidget.routeName);
-                        },
-                      ),
-
-                    ],
-                  ),
+                  child: FutureBuilder(
+                    future: _future,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Center(child: Text('Error loading stations: ${snapshot.error}'));
+                      }
+                      if (!snapshot.hasData) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      final stations = snapshot.data!;
+                      return GridView(
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 160, // Controls width of each card
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 1, // Controls height ratio
+                        ),
+                        children: [
+                          for (final station in stations) 
+                            _buildFeatureCard(
+                              title: "Station #${station['station_id']}",
+                              icon: Icons.water_drop,
+                              color: Colors.blue,
+                              onTap: () {
+                                station_num = station['station_id'];
+                                context.pushNamed(AnimalPageWidget.routeName);
+                              },
+                          )
+                        ],
+                      );
+                    }
+                  )
                 ),
               ],
             ),
@@ -569,18 +562,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: color,
-            ),
-          ),
-
-          SizedBox(height: 6),
-
-          // Subtitle
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey[700],
             ),
           ),
         ],
