@@ -517,7 +517,7 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                     future: _future,
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return Center(child: Text('Error loading station: ${snapshot.error}'));
+                        return Center(child: Text('Error loading measurements: ${snapshot.error}'));
                       }
                       if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
@@ -538,6 +538,9 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                         listOfLists.add(data);
                       }
 
+                      if (measurements.length == 0) {
+                        return Center(child: Text('Table is empty or cannot be accessed.'));
+                      }
                       return Center (
                         child: SingleChildScrollView(     // The full table
                           child: Padding (

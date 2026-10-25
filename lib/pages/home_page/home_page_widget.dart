@@ -498,6 +498,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         return const Center(child: CircularProgressIndicator());
                       }
                       final stations = snapshot.data!;
+
+                      if (stations.length == 0) {
+                        return Center(child: Text('Table is empty or cannot be accessed.'));
+                      }
                       return GridView(
                         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                           maxCrossAxisExtent: 160, // Controls width of each card
