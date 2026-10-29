@@ -9,6 +9,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'worm_test_model.dart';
 export 'worm_test_model.dart';
+import '/auth/base_auth_user_provider.dart';
 
 class WormTestWidget extends StatefulWidget {
   const WormTestWidget({super.key});
@@ -345,19 +346,27 @@ class _WormTestWidgetState extends State<WormTestWidget> {
                     onTap: () async {
                       Navigator.pop(context);
 
-                      context.pushNamed(LoginPageWidget.routeName);
+                      if (!loggedIn) {
+                        context.pushNamed(LoginPageWidget.routeName);
+                      } else {
+                        context.pushNamed(AccountPageWidget.routeName);
+                      }
                     },
                     child: Material(
                       color: const Color.fromRGBO(0, 0, 0, 0),
                       child: ListTile(
                         leading: Icon(
-                          Icons.login,
+                          loggedIn
+                            ? Icons.person
+                            : Icons.login,
                           color: Colors.white,
                         ),
                         title: Text(
-                          FFLocalizations.of(context).getText(
-                            'n2slwazh' /* Sign In */,
-                          ),
+                          loggedIn
+                            ? 'Account'
+                            : FFLocalizations.of(context).getText(
+                                'n2slwazh' /* Sign In */,
+                              ),
                           style:
                               FlutterFlowTheme.of(context).titleLarge.override(
                                     fontFamily: 'Inter Tight',

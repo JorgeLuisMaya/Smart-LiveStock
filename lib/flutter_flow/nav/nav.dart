@@ -124,6 +124,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: AnimalPageWidget.routeName,
           path: AnimalPageWidget.routePath,
           builder: (context, params) => AnimalPageWidget(),
+        ),
+        FFRoute(
+          name: AccountPageWidget.routeName,
+          path: AccountPageWidget.routePath,
+          builder: (context, params) => AccountPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

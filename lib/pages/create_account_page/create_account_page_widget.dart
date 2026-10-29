@@ -141,6 +141,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Inter',
+                                              fontSize: 16.0,
                                               letterSpacing: 0.0,
                                             ),
                                         enabledBorder: OutlineInputBorder(
@@ -187,6 +188,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
+                                            fontSize: 16.0,
                                             letterSpacing: 0.0,
                                           ),
                                       keyboardType: TextInputType.emailAddress,
@@ -216,6 +218,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Inter',
+                                              fontSize: 16.0,
                                               letterSpacing: 0.0,
                                             ),
                                         enabledBorder: OutlineInputBorder(
@@ -278,6 +281,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
+                                            fontSize: 16.0,
                                             letterSpacing: 0.0,
                                           ),
                                       validator: _model
@@ -309,6 +313,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Inter',
+                                              fontSize: 16.0,
                                               letterSpacing: 0.0,
                                             ),
                                         enabledBorder: OutlineInputBorder(
@@ -373,6 +378,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
+                                            fontSize: 16.0,
                                             letterSpacing: 0.0,
                                           ),
                                       minLines: 1,

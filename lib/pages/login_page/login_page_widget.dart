@@ -142,7 +142,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                             .override(
                                               fontFamily: 'Plus Jakarta Sans',
                                               color: Color(0xFF57636C),
-                                              fontSize: 14.0,
+                                              fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -186,7 +186,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           .override(
                                             fontFamily: 'Plus Jakarta Sans',
                                             color: Color(0xFF101213),
-                                            fontSize: 14.0,
+                                            fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -218,7 +218,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                             .override(
                                               fontFamily: 'Plus Jakarta Sans',
                                               color: Color(0xFF57636C),
-                                              fontSize: 14.0,
+                                              fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -277,7 +277,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           .override(
                                             fontFamily: 'Plus Jakarta Sans',
                                             color: Color(0xFF101213),
-                                            fontSize: 14.0,
+                                            fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
                                           ),

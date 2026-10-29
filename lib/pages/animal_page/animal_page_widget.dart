@@ -6,10 +6,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
-// import 'package:supabase_flutter/supabase_flutter.dart';
 import 'animal_page_model.dart';
 export 'animal_page_model.dart';
 import 'package:to_csv/to_csv.dart' as exportCSV;
+import '/auth/base_auth_user_provider.dart';
 
 class AnimalPageWidget extends StatefulWidget {
   const AnimalPageWidget({super.key});
@@ -349,19 +349,27 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                     onTap: () async {
                       Navigator.pop(context);
 
-                      context.pushNamed(LoginPageWidget.routeName);
+                      if (!loggedIn) {
+                        context.pushNamed(LoginPageWidget.routeName);
+                      } else {
+                        context.pushNamed(AccountPageWidget.routeName);
+                      }
                     },
                     child: Material(
                       color: const Color.fromRGBO(0, 0, 0, 0),
                       child: ListTile(
                         leading: Icon(
-                          Icons.login,
+                          loggedIn
+                            ? Icons.person
+                            : Icons.login,
                           color: Colors.white,
                         ),
                         title: Text(
-                          FFLocalizations.of(context).getText(
-                            'n2slwazh' /* Sign In */,
-                          ),
+                          loggedIn
+                            ? 'Account'
+                            : FFLocalizations.of(context).getText(
+                                'n2slwazh' /* Sign In */,
+                              ),
                           style:
                               FlutterFlowTheme.of(context).titleLarge.override(
                                     fontFamily: 'Inter Tight',
@@ -460,8 +468,8 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                 header.add('Station ID');
                 header.add('Measurement');
                 header.add('Battery Life');
-                header.add('Trough Empty Weight');
-                header.add('Trough Max Capacity');
+                // header.add('Trough Empty Weight');
+                // header.add('Trough Max Capacity');
                 header.add('Time');
 
                 exportCSV.myCSV(
@@ -531,8 +539,8 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                           measurement_i['station_id'].toString(),
                           measurement_i['measurement'].toString(),
                           measurement_i['battery'].toString(),
-                          measurement_i['stations']['trough_empty_weight'].toString(),
-                          measurement_i['stations']['trough_max_capacity'].toString(),
+                          // measurement_i['stations']['trough_empty_weight'].toString(),
+                          // measurement_i['stations']['trough_max_capacity'].toString(),
                           measurement_i['time'].toString()
                         ];
                         listOfLists.add(data);
@@ -541,132 +549,148 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                       if (measurements.length == 0) {
                         return Center(child: Text('Table is empty or cannot be accessed.'));
                       }
-                      return Center (
+                      return Scrollbar (
                         child: SingleChildScrollView(     // The full table
-                          child: Padding (
-                            padding: const EdgeInsets.all(15),
-                            child: Table (
-                              border: TableBorder.all(color: Colors.black),
-                              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                              children: [
-                                const TableRow(
-                                  decoration: BoxDecoration(
-                                    color: Colors.blueAccent,
-                                  ),
-                                  children: [     // The header for each column in the table
-                                    TableCell (
-                                      verticalAlignment: TableCellVerticalAlignment.middle,
-                                      child: Padding (
-                                        padding: EdgeInsets.all(8),
-                                        child: Text('Measurement ID'),
-                                      )
-                                    ),
-                                    TableCell (
-                                      verticalAlignment: TableCellVerticalAlignment.middle,
-                                      child: Padding (
-                                        padding: EdgeInsets.all(8),
-                                        child: Text('Station ID'),
-                                      )
-                                    ),
-                                    TableCell (
-                                      verticalAlignment: TableCellVerticalAlignment.middle,
-                                      child: Padding (
-                                        padding: EdgeInsets.all(8),
-                                        child: Text('Measurement'),
-                                      )
-                                    ),
-                                    TableCell (
-                                      verticalAlignment: TableCellVerticalAlignment.middle,
-                                      child: Padding (
-                                        padding: EdgeInsets.all(8),
-                                        child: Text('Battery Life'),
-                                      )
-                                    ),
-                                    TableCell (
-                                      verticalAlignment: TableCellVerticalAlignment.middle,
-                                      child: Padding (
-                                        padding: EdgeInsets.all(8),
-                                        child: Text('Trough Empty Weight'),
-                                      )
-                                    ),
-                                    TableCell (
-                                      verticalAlignment: TableCellVerticalAlignment.middle,
-                                      child: Padding (
-                                        padding: EdgeInsets.all(8),
-                                        child: Text('Trough Max Capacity'),
-                                      )
-                                    ),
-                                    TableCell (
-                                      verticalAlignment: TableCellVerticalAlignment.middle,
-                                      child: Padding (
-                                        padding: EdgeInsets.all(8),
-                                        child: Text('Time'),
-                                      )
-                                    ),
-                                  ]
+                          scrollDirection: Axis.vertical,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Padding (
+                              padding: const EdgeInsets.all(15),
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  minWidth: MediaQuery.sizeOf(context).width * 0.9,
                                 ),
-                                ...List.generate(     // The data for the tables
-                                  measurements.length, 
-                                  (index) {
-                                    final measurement = measurements[index];
-                                    return TableRow (
-                                      children: [
+                                child: Table (
+                                  columnWidths: const {
+                                   0: IntrinsicColumnWidth(),
+                                   1: IntrinsicColumnWidth(),
+                                   2: IntrinsicColumnWidth(),
+                                   3: IntrinsicColumnWidth(),
+                                   4: IntrinsicColumnWidth(),
+                                  },
+                                  border: TableBorder.all(color: Colors.black),
+                                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                                  children: [
+                                    const TableRow(
+                                      decoration: BoxDecoration(
+                                        color: Colors.blueAccent,
+                                      ),
+                                      children: [     // The header for each column in the table
                                         TableCell (
                                           verticalAlignment: TableCellVerticalAlignment.middle,
                                           child: Padding (
                                             padding: EdgeInsets.all(8),
-                                            child: Text(measurement['measurement_id'].toString())
+                                            child: Text('Measurement ID'),
                                           )
                                         ),
                                         TableCell (
                                           verticalAlignment: TableCellVerticalAlignment.middle,
                                           child: Padding (
                                             padding: EdgeInsets.all(8),
-                                            child: Text(measurement['station_id'].toString())
+                                            child: Text('Station ID'),
                                           )
                                         ),
                                         TableCell (
                                           verticalAlignment: TableCellVerticalAlignment.middle,
                                           child: Padding (
                                             padding: EdgeInsets.all(8),
-                                            child: Text(measurement['measurement'].toString())
+                                            child: Text('Measurement'),
                                           )
                                         ),
                                         TableCell (
                                           verticalAlignment: TableCellVerticalAlignment.middle,
                                           child: Padding (
                                             padding: EdgeInsets.all(8),
-                                            child: Text(measurement['battery'].toString())
+                                            child: Text('Battery Life'),
                                           )
                                         ),
+                                        // TableCell (
+                                        //   verticalAlignment: TableCellVerticalAlignment.middle,
+                                        //   child: Padding (
+                                        //     padding: EdgeInsets.all(8),
+                                        //     child: Text('Trough Empty Weight'),
+                                        //   )
+                                        // ),
+                                        // TableCell (
+                                        //   verticalAlignment: TableCellVerticalAlignment.middle,
+                                        //   child: Padding (
+                                        //     padding: EdgeInsets.all(8),
+                                        //     child: Text('Trough Max Capacity'),
+                                        //   )
+                                        // ),
                                         TableCell (
                                           verticalAlignment: TableCellVerticalAlignment.middle,
                                           child: Padding (
                                             padding: EdgeInsets.all(8),
-                                            child: Text(measurement['stations']['trough_empty_weight'].toString())
-                                          )
-                                        ),
-                                        TableCell (
-                                          verticalAlignment: TableCellVerticalAlignment.middle,
-                                          child: Padding (
-                                            padding: EdgeInsets.all(8),
-                                            child: Text(measurement['stations']['trough_max_capacity'].toString())
-                                          )
-                                        ),
-                                        TableCell (
-                                          verticalAlignment: TableCellVerticalAlignment.middle,
-                                          child: Padding (
-                                            padding: EdgeInsets.all(8),
-                                            child: Text(measurement['time'].toString())
+                                            child: Text('Time'),
                                           )
                                         ),
                                       ]
-                                    );
-                                  }
+                                    ),
+                                    ...List.generate(     // The data for the tables
+                                      measurements.length, 
+                                      (index) {
+                                        final measurement = measurements[index];
+                                        return TableRow (
+                                          children: [
+                                            TableCell (
+                                              verticalAlignment: TableCellVerticalAlignment.middle,
+                                              child: Padding (
+                                                padding: EdgeInsets.all(8),
+                                                child: Text(measurement['measurement_id'].toString(),)
+                                              )
+                                            ),
+                                            TableCell (
+                                              verticalAlignment: TableCellVerticalAlignment.middle,
+                                              child: Padding (
+                                                padding: EdgeInsets.all(8),
+                                                child: Text(measurement['station_id'].toString())
+                                              )
+                                            ),
+                                            TableCell (
+                                              verticalAlignment: TableCellVerticalAlignment.middle,
+                                              child: Padding (
+                                                padding: EdgeInsets.all(8),
+                                                child: Text(measurement['measurement'].toString())
+                                              )
+                                            ),
+                                            TableCell (
+                                              verticalAlignment: TableCellVerticalAlignment.middle,
+                                              child: Padding (
+                                                padding: EdgeInsets.all(8),
+                                                child: Text(measurement['battery'].toString())
+                                              )
+                                            ),
+                                            // TableCell (
+                                            //   verticalAlignment: TableCellVerticalAlignment.middle,
+                                            //   child: Padding (
+                                            //     padding: EdgeInsets.all(8),
+                                            //     child: Text(measurement['stations']['trough_empty_weight'].toString())
+                                            //   )
+                                            // ),
+                                            // TableCell (
+                                            //   verticalAlignment: TableCellVerticalAlignment.middle,
+                                            //   child: Padding (
+                                            //     padding: EdgeInsets.all(8),
+                                            //     child: Text(measurement['stations']['trough_max_capacity'].toString())
+                                            //   )
+                                            // ),
+                                            TableCell (
+                                              verticalAlignment: TableCellVerticalAlignment.middle,
+                                              child: Padding (
+                                                padding: EdgeInsets.all(8),
+                                                child: Text(measurement['time'].toString())
+                                              )
+                                            ),
+                                          ]
+                                        );
+                                      }
+                                    )
+                                  ]
                                 )
-                              ]
-                            )
-                          ),
+                              ),
+                            ),
+                          )
                         )
                       );
                     },

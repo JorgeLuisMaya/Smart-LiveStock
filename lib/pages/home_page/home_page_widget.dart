@@ -6,6 +6,7 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
+import '/auth/base_auth_user_provider.dart';
 
 String station_num = '0';
 
@@ -345,19 +346,27 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     onTap: () async {
                       Navigator.pop(context);
 
-                      context.pushNamed(LoginPageWidget.routeName);
+                      if (!loggedIn) {
+                        context.pushNamed(LoginPageWidget.routeName);
+                      } else {
+                        context.pushNamed(AccountPageWidget.routeName);
+                      }
                     },
                     child: Material(
                       color: const Color.fromRGBO(0, 0, 0, 0),
                       child: ListTile(
                         leading: Icon(
-                          Icons.login,
+                          loggedIn
+                            ? Icons.person
+                            : Icons.login,
                           color: Colors.white,
                         ),
                         title: Text(
-                          FFLocalizations.of(context).getText(
-                            'n2slwazh' /* Sign In */,
-                          ),
+                          loggedIn
+                            ? 'Account'
+                            : FFLocalizations.of(context).getText(
+                                'n2slwazh' /* Sign In */,
+                              ),
                           style:
                               FlutterFlowTheme.of(context).titleLarge.override(
                                     fontFamily: 'Inter Tight',
@@ -444,7 +453,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             IconButton(
               icon: Icon(Icons.account_circle, color: Colors.black),
               onPressed: () {
-                context.pushNamed(LoginPageWidget.routeName);
+                if (!loggedIn) {
+                  context.pushNamed(LoginPageWidget.routeName);
+                } else {
+                  context.pushNamed(AccountPageWidget.routeName);
+                }
               },
               iconSize: 30,
             ),
@@ -519,7 +532,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 station_num = station['station_id'];
                                 context.pushNamed(AnimalPageWidget.routeName);
                               },
-                          )
+                            )
                         ],
                       );
                     }
@@ -538,7 +551,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   required IconData icon,
   required Color color,
   required VoidCallback onTap,
-}) {
+  }) {
   return InkWell(
     onTap: onTap,
     borderRadius: BorderRadius.circular(20),
@@ -553,10 +566,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         children: [
           Icon(
             icon,
-            size: 45,
+            size: 30,
             color: color,
           ),
-          SizedBox(height: 12),
+          SizedBox(height: 6),
 
           // Title
           Text(
