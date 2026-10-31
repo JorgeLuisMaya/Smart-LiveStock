@@ -455,6 +455,14 @@ class _AccountPageWidgetState extends State<AccountPageWidget> {
             ),
           ],
         ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: Text('Account page is not available yet, user can log out by pressing button on top right corner.')
+            )
+          )
+        )
       ),
     );
   }

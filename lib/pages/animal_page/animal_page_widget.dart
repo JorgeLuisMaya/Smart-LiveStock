@@ -468,18 +468,18 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                 header.add('Station ID');
                 header.add('Measurement');
                 header.add('Battery Life');
-                // header.add('Trough Empty Weight');
-                // header.add('Trough Max Capacity');
                 header.add('Time');
 
-                exportCSV.myCSV(
-                  header, 
-                  listOfLists,
-                  setHeadersInFirstRow:true,
-                  includeNoRow: true, 
-                  sharing: false,
-                  fileName: "measurementsCSV",
-                );
+                // if (loggedIn) {
+                  exportCSV.myCSV(
+                    header, 
+                    listOfLists,
+                    setHeadersInFirstRow:true,
+                    includeNoRow: true, 
+                    sharing: false,
+                    fileName: "measurementsCSV",
+                  );
+                // }
               },
               iconSize: 45,
             ),
@@ -539,13 +539,14 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                           measurement_i['station_id'].toString(),
                           measurement_i['measurement'].toString(),
                           measurement_i['battery'].toString(),
-                          // measurement_i['stations']['trough_empty_weight'].toString(),
-                          // measurement_i['stations']['trough_max_capacity'].toString(),
                           measurement_i['time'].toString()
                         ];
                         listOfLists.add(data);
                       }
 
+                      // if (!loggedIn) {
+                      //   return Center(child: Text('User needs to be logged in to view the table and download the CSV.'));
+                      // }
                       if (measurements.length == 0) {
                         return Center(child: Text('Table is empty or cannot be accessed.'));
                       }
@@ -604,20 +605,6 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                                             child: Text('Battery Life'),
                                           )
                                         ),
-                                        // TableCell (
-                                        //   verticalAlignment: TableCellVerticalAlignment.middle,
-                                        //   child: Padding (
-                                        //     padding: EdgeInsets.all(8),
-                                        //     child: Text('Trough Empty Weight'),
-                                        //   )
-                                        // ),
-                                        // TableCell (
-                                        //   verticalAlignment: TableCellVerticalAlignment.middle,
-                                        //   child: Padding (
-                                        //     padding: EdgeInsets.all(8),
-                                        //     child: Text('Trough Max Capacity'),
-                                        //   )
-                                        // ),
                                         TableCell (
                                           verticalAlignment: TableCellVerticalAlignment.middle,
                                           child: Padding (
@@ -661,20 +648,6 @@ class _AnimalPageWidgetState extends State<AnimalPageWidget> {
                                                 child: Text(measurement['battery'].toString())
                                               )
                                             ),
-                                            // TableCell (
-                                            //   verticalAlignment: TableCellVerticalAlignment.middle,
-                                            //   child: Padding (
-                                            //     padding: EdgeInsets.all(8),
-                                            //     child: Text(measurement['stations']['trough_empty_weight'].toString())
-                                            //   )
-                                            // ),
-                                            // TableCell (
-                                            //   verticalAlignment: TableCellVerticalAlignment.middle,
-                                            //   child: Padding (
-                                            //     padding: EdgeInsets.all(8),
-                                            //     child: Text(measurement['stations']['trough_max_capacity'].toString())
-                                            //   )
-                                            // ),
                                             TableCell (
                                               verticalAlignment: TableCellVerticalAlignment.middle,
                                               child: Padding (

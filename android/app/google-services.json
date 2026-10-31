@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "131230376457",
+    "project_id": "smart-livestock-a7e75",
+    "storage_bucket": "smart-livestock-a7e75.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131230376457:android:c89e5a0e996e8c21744ed8",
+        "android_client_info": {
+          "package_name": "com.mycompany.smartlivestock"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy562mf9-mATbbKg1BJ3rTW8ZHkzKgDHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,6 +8,8 @@
 
 import 'package:app_links_web/app_links_web.dart';
 import 'package:file_saver/file_saver_web.dart';
+import 'package:firebase_core_web/firebase_core_web.dart';
+import 'package:firebase_messaging_web/firebase_messaging_web.dart';
 import 'package:share_plus/src/share_plus_web.dart';
 import 'package:shared_preferences_web/shared_preferences_web.dart';
 import 'package:sign_in_with_apple_web/sign_in_with_apple_web.dart';
@@ -18,6 +20,8 @@ void registerPlugins([final Registrar? pluginRegistrar]) {
   final Registrar registrar = pluginRegistrar ?? webPluginRegistrar;
   AppLinksPluginWeb.registerWith(registrar);
   FileSaverWeb.registerWith(registrar);
+  FirebaseCoreWeb.registerWith(registrar);
+  FirebaseMessagingWeb.registerWith(registrar);
   SharePlusWebPlugin.registerWith(registrar);
   SharedPreferencesPlugin.registerWith(registrar);
   SignInWithApplePlugin.registerWith(registrar);

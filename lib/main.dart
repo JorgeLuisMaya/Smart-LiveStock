@@ -10,6 +10,10 @@ import '/backend/supabase/supabase.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   debugPrint('STEP 1: binding ok');
@@ -23,6 +27,12 @@ void main() async {
   debugPrint('STEP 4: initializing SupaFlow...');
   await SupaFlow.initialize();
   debugPrint('STEP 5: SupaFlow initialized');
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+  );
+  debugPrint('STEP 6: Firebase Initialized');
 
   runApp(MyApp());
 }
