@@ -1,0 +1,1 @@
+ C:\\capstone\\Smart-LiveStock\\.dart_tool\\flutter_build\\6ad7b7526a15a1433b5b6b7e771b299b\\build_hooks_result.json:  C:\\Users\\ordnb\\flutter\\bin\\cache\\dart-sdk\\version C:\\capstone\\Smart-LiveStock\\.dart_tool\\package_config.json C:\\capstone\\Smart-LiveStock\\pubspec.yaml c:\\capstone\\smart-livestock\\.dart_tool\\package_config.json
